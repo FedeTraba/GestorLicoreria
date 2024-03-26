@@ -23,8 +23,8 @@ interface AppPage {
 
 const appPages: AppPage[] = [
   {
-    title: 'Bebidas',
-    url: '/folder/Bebibas',
+    title: 'bebida',
+    url: '/folder/bebida',
     iosIcon: mailOutline,
     mdIcon: beer
   },
