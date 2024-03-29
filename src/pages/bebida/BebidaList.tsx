@@ -1,7 +1,7 @@
 import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar, } from '@ionic/react';
 import { useHistory, useParams } from 'react-router';
 import ExploreContainer from '../../components/ExploreContainer';
-import { add, addCircle, addCircleOutline, close, pencil } from 'ionicons/icons';
+import { add, addCircle, addCircleOutline, addCircleSharp, addOutline, close, pencil } from 'ionicons/icons';
 import { Icon } from 'ionicons/dist/types/components/icon/icon';
 import { useEffect, useState } from 'react';
 import { removeBebida, saveBebida, searchBebidas } from './BebidaApi';
@@ -64,7 +64,7 @@ const BebibaList: React.FC = () => {
           <IonItem>
             <IonButton color={'primary'} slot='end'
             onClick={addBebida} >
-            <IonIcon name={addCircle}/>
+            <IonIcon icon={addOutline} slot='icon-only'/>
               Agregar Bebida
             </IonButton>
           </IonItem>

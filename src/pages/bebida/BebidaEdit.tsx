@@ -1,16 +1,18 @@
-import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar, } from '@ionic/react';
+import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar, } from '@ionic/react';
 import { useHistory, useParams } from 'react-router';
 import ExploreContainer from '../../components/ExploreContainer';
-import { add, addCircle, addCircleOutline, close, pencil } from 'ionicons/icons';
+import { add, addCircle, addCircleOutline, addCircleSharp, bagAddOutline, bookmark, checkmark, close, pencil, save } from 'ionicons/icons';
 import { Icon } from 'ionicons/dist/types/components/icon/icon';
 import { useEffect, useState } from 'react';
 import { removeBebida, saveBebida, searchBebidas } from './BebidaApi';
 import Bebida from './Bebida';
+import { addPlatform } from '@capacitor/core';
+import { addIcons } from 'ionicons';
 
 const BebidaEdit: React.FC = () => {
 
   const { name,id } = useParams<{ name: string; id: string; }>();
-  const [bebidas, setBebidas] = useState<any>([]);
+  const [bebida, setBebida] = useState<any>([]);
 
   useEffect(() => {
     search();
@@ -19,6 +21,10 @@ const BebidaEdit: React.FC = () => {
   const search = () => {
     //let result = searchBebidas();
     //setBebidas(result);
+  }
+
+  const save = () =>{
+    saveBebida(bebida)
   }
 
 
@@ -39,14 +45,65 @@ const BebidaEdit: React.FC = () => {
 
       <IonContent>
         <IonCard>
-          <IonTitle>Gestion De Bebidas {id}</IonTitle>
+          <IonTitle>{id === 'new' ? 'Agregar Bebiba': 'Editar Bebida'}</IonTitle>
+
+          <IonRow>
+            <IonCol>
+              <IonItem>
+                <IonLabel position='stacked'>Nombre</IonLabel>
+                <IonInput onIonChange={b => bebida.nombre = b.detail.value}
+                value={bebida.nombre}></IonInput>
+              </IonItem>
+            </IonCol>
+
+            <IonCol>
+              
+            </IonCol>
+              <IonItem>
+                <IonLabel position='stacked'>Medida</IonLabel>
+                <IonInput onIonChange={b => bebida.medida = b.detail.value}
+                value={bebida.medida}></IonInput>
+              </IonItem>
+            <IonCol>
+              <IonItem>
+                <IonLabel position='stacked'>Tipo de Bebida</IonLabel>
+                <IonInput onIonChange={b => bebida.tipoBebida = b.detail.value}
+                value={bebida.tipoBebida}></IonInput>
+              </IonItem>              
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol>
+              <IonItem>
+                <IonLabel position='stacked'>Precio Compra</IonLabel>
+                <IonInput onIonChange={b => bebida.precioCompra = b.detail.value}
+                value={bebida.precioCompra}></IonInput>
+              </IonItem>              
+            </IonCol>
+
+            <IonCol>
+              <IonItem>
+                <IonLabel position='stacked'>Precio Venta</IonLabel>
+                <IonInput onIonChange={b => bebida.precioVenta = b.detail.value}
+                value={bebida.precioVenta}></IonInput>
+              </IonItem>              
+            </IonCol>
+          </IonRow>
+          
+          
+
+
+
+
+
+
 
 
 
 
           <IonItem>
-            <IonButton color={'primary'} slot='end'>
-                <IonIcon name={addCircle}/>
+            <IonButton onClick={save} color={'success'} slot='end' size='default'>
+            <ion-icon icon={checkmark}/>
               Guardar
             </IonButton>
           </IonItem>
@@ -55,10 +112,6 @@ const BebidaEdit: React.FC = () => {
    
       </IonCard>
 
-
-      <IonButton onClick={()=>{}} fill= 'clear' >
-              Prueba
-            </IonButton>
 
       </IonContent>
     </IonPage>
