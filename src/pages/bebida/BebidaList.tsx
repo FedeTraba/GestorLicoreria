@@ -10,19 +10,19 @@ import Bebida from './Bebida';
 const BebibaList: React.FC = () => {
 
   const { name } = useParams<{ name: string; }>();
-  const [bebidas, setBebidas] = useState<any>([]);
+  const [bebidas, setBebidas] = useState<Bebida[]>([]);
   const history = useHistory();
 
   useEffect(() => {
     search();
   },[]);
 
-  const search = () => {
+  const search =  async () => {
     let result = searchBebidas();
     setBebidas(result);
   }
 
-  const remove = (id:string) => {
+  const remove = async (id:string) => {
     removeBebida(id);
     search();
   }
@@ -45,6 +45,10 @@ const BebibaList: React.FC = () => {
   const addBebida = () => {
       history.push('/folder/bebida/new');
   }
+
+  const editBebida = (id:string) => {
+    history.push('/folder/bebida/' + id);
+}
 
   return (
     <IonPage>
@@ -82,11 +86,11 @@ const BebibaList: React.FC = () => {
           <IonCol>Acciones</IonCol>
         </IonRow>
    
-        {bebidas.map((bebida: any) =>
+        {bebidas.map((bebida: Bebida) =>
         <IonRow>
           <IonCol>{bebida.nombre}</IonCol>
           <IonCol>{bebida.medida}</IonCol>
-          <IonCol>{bebida.tipo}</IonCol>
+          <IonCol>{bebida.tipoBebida}</IonCol>
           <IonCol>{bebida.marca}</IonCol>
           <IonCol>{bebida.cantStock}</IonCol>
           <IonCol>{bebida.precioCompra}</IonCol>
@@ -94,12 +98,12 @@ const BebibaList: React.FC = () => {
 
           <IonCol>
             <IonButton color='primary' fill= 'solid'
-             >
+              onClick={() => editBebida(String(bebida.id))}>
               <IonIcon icon={pencil} slot='icon-only'/>
             </IonButton>
 
             <IonButton color='danger' fill= 'solid'
-            onClick={() => remove(bebida.id)}>
+            onClick={() => remove(String(bebida.id))}>
               <IonIcon icon={close} slot='icon-only'/>
             </IonButton>
           </IonCol>

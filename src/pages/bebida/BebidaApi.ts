@@ -3,23 +3,36 @@ export function searchBebidas(){
         localStorage['bebidas'] = '[]';
     }
 
-    let bebibas = localStorage['bebidas'];
-    bebibas = JSON.parse(bebibas);
+    let bebidas = localStorage['bebidas'];
+    bebidas = JSON.parse(bebidas);
 
-    return bebibas;
+    return bebidas;
 }
 
 
 export function removeBebida(id:string){
-    let bebibas = searchBebidas();
-    let indice = bebibas.findIndex((bebida: any) => bebida.id == id)
-    bebibas.splice(indice,1);
-    localStorage['bebidas'] = JSON.stringify(bebibas);
+    let bebidas = searchBebidas();
+    let indice = bebidas.findIndex((bebida: any) => bebida.id == id)
+    bebidas.splice(indice,1);
+    localStorage['bebidas'] = JSON.stringify(bebidas);
 }
 
 
-export function saveBebida(bebiba:any){
-    let bebibas = searchBebidas();
-    bebibas.push(bebiba)
-    localStorage['bebidas'] = JSON.stringify(bebibas);
+export function saveBebida(bebida:any){
+    let bebidas = searchBebidas();
+    if (bebida.id){
+        // Editar
+        let indice = bebidas.findIndex((b: any) => b.id == bebida.id)
+        bebidas[indice] = bebida;
+    }else{
+        // Nuevo
+        bebida.id = Math.round(Math.random() * 100000);
+        bebidas.push(bebida);
+    }
+    localStorage['bebidas'] = JSON.stringify(bebidas);
+}
+
+export function saveBebidaById(id: string){
+    let bebidas = searchBebidas();
+    return bebidas.find((bebida: any)=> bebida.id == id); 
 }

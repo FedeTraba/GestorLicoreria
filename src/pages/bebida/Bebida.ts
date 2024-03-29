@@ -2,7 +2,7 @@ export default interface Bebida{
     id?:string,
     nombre?:string,
     medida?:string,
-    tipo?: string,
+    tipoBebida?: string,
     marca?:string,
     cantStock?:string,
     precioCompra?: string,
