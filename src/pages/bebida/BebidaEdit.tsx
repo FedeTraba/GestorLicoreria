@@ -24,8 +24,8 @@ const BebidaEdit: React.FC = () => {
       if (id === 'new') {
         setBebida({});
       } else {
-        let result = await searchBebidaById(id);
-        setBebida(result);
+        // let result = await searchBebidaById(id);
+        // setBebida(result);
       }
     }
 
@@ -33,7 +33,7 @@ const BebidaEdit: React.FC = () => {
 
   const save = async () =>{
     await saveBebida(bebida);
-    history.push('/folder/bebidas');
+    history.push('/folder/bebida');
   }
 
 
@@ -66,21 +66,38 @@ const BebidaEdit: React.FC = () => {
             </IonCol>
 
             <IonCol>
-              
+              <IonItem>
+                <IonLabel position='stacked'>Marca</IonLabel>
+                <IonInput onIonChange={b => bebida.marca = String(b.detail.value)}
+                value={bebida.precioCompra}></IonInput>
+              </IonItem>              
             </IonCol>
+
+            <IonCol>
               <IonItem>
                 <IonLabel position='stacked'>Medida</IonLabel>
                 <IonInput onIonChange={b => bebida.medida = String(b.detail.value)}
                 value={bebida.medida}></IonInput>
               </IonItem>
+            </IonCol>
+
             <IonCol>
               <IonItem>
                 <IonLabel position='stacked'>Tipo de Bebida</IonLabel>
                 <IonInput onIonChange={b => bebida.tipoBebida = String(b.detail.value)}
                 value={bebida.tipoBebida}></IonInput>
               </IonItem>              
-            </IonCol>
+            </IonCol> 
           </IonRow>
+            
+            
+
+
+         
+
+
+
+
           <IonRow>
             <IonCol>
               <IonItem>
@@ -112,7 +129,7 @@ const BebidaEdit: React.FC = () => {
 
           <IonItem>
             <IonButton onClick={save} color={'success'} slot='end' size='default'>
-              <ion-icon icon={checkmark}/>
+              <IonIcon icon={checkmark}/>
               Guardar
             </IonButton>
           </IonItem>

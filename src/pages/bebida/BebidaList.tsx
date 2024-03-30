@@ -15,7 +15,7 @@ const BebibaList: React.FC = () => {
 
   useEffect(() => {
     search();
-  },[]);
+  },[history.location.pathname]);
 
   const search =  async () => {
     let result = searchBebidas();
